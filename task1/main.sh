@@ -1,6 +1,8 @@
+echo "
 #############################################################
 ## [1]. DEFINICION DE VARIABLES DEL SERVICE ACCOUNT DE GCP ##
 #############################################################
+"
 
 ## GCP Project Name - Ejemplo: devops-manuel
 GCP_PROJECT="PUT_GCP_PROJECT_HERE"
@@ -15,9 +17,11 @@ GPC_CLIENT_ID="PUT_GCP_CLIENT_ID_HERE"
 ## GCP CLIENT X509 CERT URL - Ejemplo: https://www.googleapis.com/robot/v1/metadata/x509/gcp-devops%40devop-manu.iam.gserviceaccount.com
 GPC_CLIENT_CERT_URL="PUT_CLIENT_CERT_URL_HERE"
 
+echo "
 #################################################
 ## [1.1]. DEFINICION DE VARIABLES DE TERRAFORM ##
 #################################################
+"
 
 ## GPC LOCATION
 GPC_LOCATION="PUT_GKE_LOCATION_HERE"
@@ -28,9 +32,11 @@ GKE_NODE_POOL="PUT_GKE_NODEPOOL_NAME_HERE"
 ## GKE MACHINE TYPE
 GKE_MACHINE_TYPE="PUT_GKE_MACHINE_TYPE_HERE"
 
+echo "
 ###############################################################
 ## [2]. REEMPLAZAR VARIABLES EN json DE CONFIGURACION DE GCP ##
 ###############################################################
+"
 
 jq -n '{ "type": "service_account", "project_id": $gcp_project, 
                                     "private_key_id": $gcp_private_key_id, 
@@ -51,9 +57,11 @@ jq -n '{ "type": "service_account", "project_id": $gcp_project,
 
 sed -i 's+\\n+n+g' terraform/account.json
 
+echo "
 ############################################
 ## [3]. INSTALACION DE TERRAFORM SEGUN OS ##
 ############################################
+"
 
 ## Identificar el OS
 case "$OSTYPE" in   solaris*) OS_TYPE=solaris;;   darwin*)  OS_TYPE=darwin;;    linux*)   OS_TYPE=linux;;   bsd*)     OS_TYPE=freebsd;;   msys*)    OS_TYPE=windows;;   *)        OS_TYPE=unknown;; esac
@@ -86,9 +94,11 @@ mv terraform.exe "terraform"
 ## Eliminar el archivo ZIP
 rm -rf "$FILENAME"
 
+echo "
 ###################################################
 ## [4]. REEMPLAZAR VARIABLES EN terraform.tfvars ##
 ###################################################
+"
 
 jq -n '{  "project_id": $gcp_project, 
           "location": $gcp_location,
@@ -102,9 +112,11 @@ jq -n '{  "project_id": $gcp_project,
     --arg gke_machine_type $GKE_MACHINE_TYPE \
     > terraform/terraform.tfvars.json
 
+echo "
 #########################################
 ## [5]. EJECUTAR COMANDOS DE TERRAFORM ##
 #########################################
+"
 
 ## TERRAFORM INIT
 cd terraform
@@ -117,22 +129,26 @@ cd terraform
 ./terraform.exe apply -auto-approve
 
 ## TERRAFORM OUTPUT VARIABLES
-CLUSTER_NAME=($(./terraform/terraform.exe output name))
-CLUSTER_CA_CRT=($(./terraform/terraform.exe output cluster_ca_certificate))
-CLUSTER_ENDPOINT=($(./terraform/terraform.exe output endpoint))
-CLUSTER_MASTER_VERSION=($(./terraform/terraform.exe output master_version))
+CLUSTER_NAME=($(./terraform.exe output name))
+CLUSTER_CA_CRT=($(./terraform.exe output cluster_ca_certificate))
+CLUSTER_ENDPOINT=($(./terraform.exe output endpoint))
+CLUSTER_MASTER_VERSION=($(./terraform.exe output master_version))
 
+echo "
 #########################################
 ## [6]. LOG IN AND CONFIGURE INTO GCP  ##
 #########################################
+"
 
 gcloud auth activate-service-account $GPC_CLIENT_MAIL --key-file=account.json --project=$GCP_PROJECT
 
 gcloud container clusters get-credentials $GKE_NAME --region $GPC_LOCATION
 
+echo "
 #######################################
 ## [7]. CONFIGURAR HELM Y EL INGRESS ##
 #######################################
+"
 
 ## INSTLACION DE HELM
 kubectl create serviceaccount --namespace kube-system tiller
@@ -143,20 +159,54 @@ kubectl get deployments -n kube-system
 ## INSTALACION DE INGRESS
 helm install --name nginx-ingress stable/nginx-ingress --set rbac.create=true --set controller.publishService.enabled=true
 
+echo "
 #######################################
 ## [8]. CREACION DE IMAGEN DE DOCKER ##
 #######################################
+"
 
 # Build Docker image
 cd ../python/src
-docker build -t python-rest .
+docker build -t pythonrest:latest .
+
+# Autenticar con GCR
+gcloud auth configure-docker
 
 # Subir la imagen a GCR
-docker tag python-rest gcr.io/$GCP_PROJECT/mypythonapp
+docker tag pythonrest gcr.io/$GCP_PROJECT/mypythonapp
 
 docker push gcr.io/$GCP_PROJECT/mypythonapp
 
+echo "
 #############################################
-## [9]. DEPLOYMENT DE LA APLICACION AL GKE ##
+## [9]. CONFIGURACION DE AUTH DE GKE Y GCR ##
 #############################################
+"
 
+cd ../../terraform
+kubectl create secret docker-registry regcred \
+  --docker-server=https://gcr.io \
+  --docker-username=_json_key \
+  --docker-email=$GPC_CLIENT_MAIL \
+  --docker-password="$(cat account.json)"
+
+kubectl patch serviceaccount default \
+  -p "{\"imagePullSecrets\": [{\"name\": \"regcred\"}]}"
+
+echo "
+##############################################
+## [10]. DEPLOYMENT DE LA APLICACION AL GKE ##
+##############################################
+"
+
+# CREAR DEPLOYMENT
+kubectl create deployment mypythonapp --image=gcr.io/$GCP_PROJECT/mypythonapp:latest
+
+# Exponer el service publicamente
+kubectl expose deployment mypythonapp --type=LoadBalancer --port 80 --target-port 5000
+
+echo "
+#################################
+## [10]. DEPLOYMENT COMPLETADO ##
+#################################
+"
