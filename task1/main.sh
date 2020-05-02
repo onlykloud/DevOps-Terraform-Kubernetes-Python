@@ -1,35 +1,36 @@
-############################################################
-# [1]. DEFINICION DE VARIABLES DEL SERVICE ACCOUNT DE GCP ##
-############################################################
+#############################################################
+## [1]. DEFINICION DE VARIABLES DEL SERVICE ACCOUNT DE GCP ##
+#############################################################
 
 ## GCP Project Name - Ejemplo: devops-manuel
 GCP_PROJECT="devop-manu"
-
 ## GCP Private Key ID - Ejemplo: 282b19cf817f43240aw984feaca8623aa29af233
 GPC_PRIVATE_KEY_ID="282b19cf817f43240af984feaca86b3aa29af233"
-
 ## GCP Private Key - Ejemplo: -----BEGIN PRIVATE KEY-----\-----END PRIVATE KEY-----\n
 GPC_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQC8RCHSOBA2vvf9\n5n1TpPfyk5g/ksS/YsuA8efwCm0VzHKGu6Lkyt4Krz22qVYMwrkkdH2FZVC9osVH\nZ9R2Mj6FxEyGb869dPLJfifZ0q3vU3Tdo/rP8895XaZuAKlNoydEn40xZ0Tu62PM\n/aeahvQvxlPq3gbPbRw72YeinMlUnBiJHeojYL61DSKSwmMQjXvr5lspvfENwW8G\n0CnrBzc+4Pa/hTtjr38FNQLc0zcuO15BG8eY3p94yOJ6hz3bR0T9lRYBEzP8rUAd\nFs48bqSPdUVMreOehAoc76XbQmxmXAPCQAecwvuw0PzwlV0+dERNtqWGuDKIU5Kg\nUy0LzcaXAgMBAAECggEABdyXMvzk4Fd80C5ze3247JgU1vHiZ1UTof2mK46fi9y0\nOiawcTAxzqJbKQtHrxkG+7AW0mbvpx/gxZLhhhaVZMPSYCMuDC8OeiCP7BPHr5pp\nGpeG8R+Vt6EnU+h4XP7184iGNGITPt8cWd8R71lBVBV4OmlUS/QJO4HP28vG5vfx\ncETkdojsxa78yXcvyefncDQXfp/yY/j6P2r5PrIURAicORHmVSFTh72LVjUb4xTw\nFu8xTqcPij8KdwHTzt5xqQb1cI7T9j8VpXiutHO5APWcothRy++jWfWd3r+E23r1\nucfLJMsUcou+zeSUNTOWW5pyNJ+qDM7qgrdOeT97lQKBgQD6Bv2IMJZ87apIabCl\nVUbVUbFrUXwEQsiWwjJvCxYk0ARLVKtTTXhjz6FNAM99kdmySyARZtSLQGfj+Hkz\nXrY7Ve4qrqEmluH/5H3littaxNziEFiB67zQgeSkMULVCSdmsdqbbgxwGFzZadWA\nkLabhJt0oLGfdwzmcRcDpyxP6wKBgQDAw3MIAMr4n1T+HEaXJCLJ9+vU+CGuEsBc\nQ7XMOsvgzLiha7bKSVHvOjWrOf2Q0AeyH9nuzA6yYtY1pDS0pc+jaLgcgAQ1yUcH\nsdAGuWz3R2m0adFxeWOC7KiKzuW7v1Z2NEZxkPuEjdQCMxUpbLdA4Zhsa5f1zrld\ngT7l45nlBQKBgGA4Mnen4zIesIp/igiGgeT0NGgNisGFBfbms0wCozn1h8GJywka\n5jrbG8Mrja5QY8v2l1e7EA6q8ZBM/i+jwlOhZS+t1ryoEj9NKpoczv/mhO7GxZjy\nJM7FPj1l68daZ3xg87UfK9Azv/+3d/+rMWs2JDFE6jZpNWC1otq4ChiTAoGBAL7P\negmdB03uImrbwICSM6GrORX6fRRb2XA7UjUUqoYfAFBBWJKK24EsJL4WzEpRspx+\n7PJ1qcKpFZPJtKZxT8VYvo7vpbs8P4R9XgeZ+yQX26nL6Zgi6f9Klle5EC217Ddb\n7bMzKdX/srJusG7t/8RIy+He63BVrqXBb2qOzuKlAoGBAPSgitYkwV3Ly3BtdaO9\nP8jCjRNdWYnRyXypMpFlhsHH3Pq3jGpHhqCNbEmkqT8gGk0eoqz5vxH1cMM76ozQ\nOyYTNTGs4N83g8p1AeOgWY5DLMLxa8W6zXJhfSeuj54mpDA1uUaFaLMZlJO07Eik\nPDdb8sxOZUsKcVB+oe9gE/QX\n-----END PRIVATE KEY-----\n"
-
 ## GCP Client Email - Ejemplo: gcp-devops@devop-manu.iam.gserviceaccount.com
 GPC_CLIENT_MAIL="gcp-devops@devop-manu.iam.gserviceaccount.com"
-
 ## GCP Client ID - Ejemplo: 106512508332840639292
 GPC_CLIENT_ID="106512502332840639292"
-
 ## GCP CLIENT X509 CERT URL - Ejemplo: https://www.googleapis.com/robot/v1/metadata/x509/gcp-devops%40devop-manu.iam.gserviceaccount.com
 GPC_CLIENT_CERT_URL="https://www.googleapis.com/robot/v1/metadata/x509/gcp-devops%40devop-manu.iam.gserviceaccount.com"
 
-################################################
-# [1.1]. DEFINICION DE VARIABLES DE TERRAFORM ##
-################################################
+#################################################
+## [1.1]. DEFINICION DE VARIABLES DE TERRAFORM ##
+#################################################
 
 ## GPC LOCATION
-GPC_LOCATION="us-central1-c"
+GPC_LOCATION="us-central1"
+## GKE NAME
+GKE_NAME="devops-manu"
+## GKE NODE POOL NAME
+GKE_NODE_POOL="devops-nodepool"
+## GKE MACHINE TYPE
+GKE_MACHINE_TYPE="n1-standard-1"
 
-##############################################################
-# [2]. REEMPLAZAR VARIABLES EN json DE CONFIGURACION DE GCP ##
-##############################################################
+###############################################################
+## [2]. REEMPLAZAR VARIABLES EN json DE CONFIGURACION DE GCP ##
+###############################################################
 
 jq -n '{ "type": "service_account", "project_id": $gcp_project, 
                                     "private_key_id": $gcp_private_key_id, 
@@ -43,14 +44,16 @@ jq -n '{ "type": "service_account", "project_id": $gcp_project,
     --arg gcp_project $GCP_PROJECT  \
     --arg gcp_private_key_id $GPC_PRIVATE_KEY_ID  \
     --arg gcp_private_key "$GPC_PRIVATE_KEY"  \
-    --arg gcp_client_mail "$GPC_CLIENT_MAIL"  \
-    --arg gcp_client_id "$GPC_CLIENT_ID"  \
-    --arg gcp_gpc_client_cert_url "$GPC_CLIENT_CERT_URL"  \
+    --arg gcp_client_mail $GPC_CLIENT_MAIL  \
+    --arg gcp_client_id $GPC_CLIENT_ID  \
+    --arg gcp_gpc_client_cert_url $GPC_CLIENT_CERT_URL \
     > terraform/account.json
 
-###########################################
-# [3]. INSTALACION DE TERRAFORM SEGUN OS ##
-###########################################
+sed -i 's+\\n+n+g' terraform/account.json
+
+############################################
+## [3]. INSTALACION DE TERRAFORM SEGUN OS ##
+############################################
 
 ## Identificar el OS
 case "$OSTYPE" in   solaris*) OS_TYPE=solaris;;   darwin*)  OS_TYPE=darwin;;    linux*)   OS_TYPE=linux;;   bsd*)     OS_TYPE=freebsd;;   msys*)    OS_TYPE=windows;;   *)        OS_TYPE=unknown;; esac
@@ -83,19 +86,25 @@ mv terraform.exe "terraform"
 ## Eliminar el archivo ZIP
 rm -rf "$FILENAME"
 
-##################################################
-# [4]. REEMPLAZAR VARIABLES EN terraform.tfvars ##
-##################################################
+###################################################
+## [4]. REEMPLAZAR VARIABLES EN terraform.tfvars ##
+###################################################
 
 jq -n '{  "project_id": $gcp_project, 
-          "location": $gcp_location  } ' \
+          "location": $gcp_location,
+          "gke_name": $gke_name,
+          "gke_nodepool": $gke_nodepool,
+          "gke_machine_type": $gke_machine_type } ' \
     --arg gcp_project $GCP_PROJECT  \
     --arg gcp_location $GPC_LOCATION  \
+    --arg gke_name $GKE_NAME  \
+    --arg gke_nodepool $GKE_NODE_POOL \
+    --arg gke_machine_type $GKE_MACHINE_TYPE \
     > terraform/terraform.tfvars.json
 
-########################################
-# [5]. EJECUTAR COMANDOS DE TERRAFORM ##
-########################################
+#########################################
+## [5]. EJECUTAR COMANDOS DE TERRAFORM ##
+#########################################
 
 ## TERRAFORM INIT
 cd terraform
@@ -105,6 +114,6 @@ cd terraform
 ./terraform.exe plan -var-file="terraform.tfvars.json"
 
 ## TERRAFORM APPLY
-./terraform.exe apply 
+./terraform.exe apply -auto-approve
 
 ## TERRAFORM OUTPUT VARIABLES
