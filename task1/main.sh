@@ -122,18 +122,17 @@ CLUSTER_CA_CRT=($(./terraform/terraform.exe output cluster_ca_certificate))
 CLUSTER_ENDPOINT=($(./terraform/terraform.exe output endpoint))
 CLUSTER_MASTER_VERSION=($(./terraform/terraform.exe output master_version))
 
-######################################
-## [6]. LOG AND CONFIGURE INTO GCP  ##
-######################################
+#########################################
+## [6]. LOG IN AND CONFIGURE INTO GCP  ##
+#########################################
 
 gcloud auth activate-service-account $GPC_CLIENT_MAIL --key-file=terraform/account.json --project=$GCP_PROJECT
 
 gcloud container clusters get-credentials $GKE_NAME --region $GPC_LOCATION
 
-#####################################
+#######################################
 ## [7]. CONFIGURAR HELM Y EL INGRESS ##
-#####################################
-
+#######################################
 
 ## INSTLACION DE HELM
 kubectl create serviceaccount --namespace kube-system tiller
@@ -144,3 +143,15 @@ kubectl get deployments -n kube-system
 ## INSTALACION DE INGRESS
 helm install --name nginx-ingress stable/nginx-ingress --set rbac.create=true --set controller.publishService.enabled=true
 
+#######################################
+## [8]. CREACION DE IMAGEN DE DOCKER ##
+#######################################
+
+# Build Docker image
+cd python
+docker build -t python-rest .
+
+# Subir la imagen a GCR
+docker tag python-rest gcr.io/$GCP_PROJECT/mypythonapp
+
+docker push gcr.io/$GCP_PROJECT/mypythonapp
