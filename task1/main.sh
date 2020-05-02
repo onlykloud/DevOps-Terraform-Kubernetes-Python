@@ -3,30 +3,30 @@
 #############################################################
 
 ## GCP Project Name - Ejemplo: devops-manuel
-GCP_PROJECT="devop-manu"
+GCP_PROJECT="PUT_GCP_PROJECT_HERE"
 ## GCP Private Key ID - Ejemplo: 282b19cf817f43240aw984feaca8623aa29af233
-GPC_PRIVATE_KEY_ID="282b19cf817f43240af984feaca86b3aa29af233"
+GPC_PRIVATE_KEY_ID="PUT_GCP_PRIVATE_KEY_ID_HERE"
 ## GCP Private Key - Ejemplo: -----BEGIN PRIVATE KEY-----\-----END PRIVATE KEY-----\n
-GPC_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQC8RCHSOBA2vvf9\n5n1TpPfyk5g/ksS/YsuA8efwCm0VzHKGu6Lkyt4Krz22qVYMwrkkdH2FZVC9osVH\nZ9R2Mj6FxEyGb869dPLJfifZ0q3vU3Tdo/rP8895XaZuAKlNoydEn40xZ0Tu62PM\n/aeahvQvxlPq3gbPbRw72YeinMlUnBiJHeojYL61DSKSwmMQjXvr5lspvfENwW8G\n0CnrBzc+4Pa/hTtjr38FNQLc0zcuO15BG8eY3p94yOJ6hz3bR0T9lRYBEzP8rUAd\nFs48bqSPdUVMreOehAoc76XbQmxmXAPCQAecwvuw0PzwlV0+dERNtqWGuDKIU5Kg\nUy0LzcaXAgMBAAECggEABdyXMvzk4Fd80C5ze3247JgU1vHiZ1UTof2mK46fi9y0\nOiawcTAxzqJbKQtHrxkG+7AW0mbvpx/gxZLhhhaVZMPSYCMuDC8OeiCP7BPHr5pp\nGpeG8R+Vt6EnU+h4XP7184iGNGITPt8cWd8R71lBVBV4OmlUS/QJO4HP28vG5vfx\ncETkdojsxa78yXcvyefncDQXfp/yY/j6P2r5PrIURAicORHmVSFTh72LVjUb4xTw\nFu8xTqcPij8KdwHTzt5xqQb1cI7T9j8VpXiutHO5APWcothRy++jWfWd3r+E23r1\nucfLJMsUcou+zeSUNTOWW5pyNJ+qDM7qgrdOeT97lQKBgQD6Bv2IMJZ87apIabCl\nVUbVUbFrUXwEQsiWwjJvCxYk0ARLVKtTTXhjz6FNAM99kdmySyARZtSLQGfj+Hkz\nXrY7Ve4qrqEmluH/5H3littaxNziEFiB67zQgeSkMULVCSdmsdqbbgxwGFzZadWA\nkLabhJt0oLGfdwzmcRcDpyxP6wKBgQDAw3MIAMr4n1T+HEaXJCLJ9+vU+CGuEsBc\nQ7XMOsvgzLiha7bKSVHvOjWrOf2Q0AeyH9nuzA6yYtY1pDS0pc+jaLgcgAQ1yUcH\nsdAGuWz3R2m0adFxeWOC7KiKzuW7v1Z2NEZxkPuEjdQCMxUpbLdA4Zhsa5f1zrld\ngT7l45nlBQKBgGA4Mnen4zIesIp/igiGgeT0NGgNisGFBfbms0wCozn1h8GJywka\n5jrbG8Mrja5QY8v2l1e7EA6q8ZBM/i+jwlOhZS+t1ryoEj9NKpoczv/mhO7GxZjy\nJM7FPj1l68daZ3xg87UfK9Azv/+3d/+rMWs2JDFE6jZpNWC1otq4ChiTAoGBAL7P\negmdB03uImrbwICSM6GrORX6fRRb2XA7UjUUqoYfAFBBWJKK24EsJL4WzEpRspx+\n7PJ1qcKpFZPJtKZxT8VYvo7vpbs8P4R9XgeZ+yQX26nL6Zgi6f9Klle5EC217Ddb\n7bMzKdX/srJusG7t/8RIy+He63BVrqXBb2qOzuKlAoGBAPSgitYkwV3Ly3BtdaO9\nP8jCjRNdWYnRyXypMpFlhsHH3Pq3jGpHhqCNbEmkqT8gGk0eoqz5vxH1cMM76ozQ\nOyYTNTGs4N83g8p1AeOgWY5DLMLxa8W6zXJhfSeuj54mpDA1uUaFaLMZlJO07Eik\nPDdb8sxOZUsKcVB+oe9gE/QX\n-----END PRIVATE KEY-----\n"
+GPC_PRIVATE_KEY="PUT_PRIVATE_KEY_HERE"
 ## GCP Client Email - Ejemplo: gcp-devops@devop-manu.iam.gserviceaccount.com
-GPC_CLIENT_MAIL="gcp-devops@devop-manu.iam.gserviceaccount.com"
+GPC_CLIENT_MAIL="PUT_GCP_CLIENT_MAIL_HERE"
 ## GCP Client ID - Ejemplo: 106512508332840639292
-GPC_CLIENT_ID="106512502332840639292"
+GPC_CLIENT_ID="PUT_GCP_CLIENT_ID_HERE"
 ## GCP CLIENT X509 CERT URL - Ejemplo: https://www.googleapis.com/robot/v1/metadata/x509/gcp-devops%40devop-manu.iam.gserviceaccount.com
-GPC_CLIENT_CERT_URL="https://www.googleapis.com/robot/v1/metadata/x509/gcp-devops%40devop-manu.iam.gserviceaccount.com"
+GPC_CLIENT_CERT_URL="PUT_CLIENT_CERT_URL_HERE"
 
 #################################################
 ## [1.1]. DEFINICION DE VARIABLES DE TERRAFORM ##
 #################################################
 
 ## GPC LOCATION
-GPC_LOCATION="us-central1"
+GPC_LOCATION="PUT_GKE_LOCATION_HERE"
 ## GKE NAME
-GKE_NAME="devops-manu"
+GKE_NAME="PUT_GKE_NAME_HERE"
 ## GKE NODE POOL NAME
-GKE_NODE_POOL="devops-nodepool"
+GKE_NODE_POOL="PUT_GKE_NODEPOOL_NAME_HERE"
 ## GKE MACHINE TYPE
-GKE_MACHINE_TYPE="n1-standard-1"
+GKE_MACHINE_TYPE="PUT_GKE_MACHINE_TYPE_HERE"
 
 ###############################################################
 ## [2]. REEMPLAZAR VARIABLES EN json DE CONFIGURACION DE GCP ##
@@ -117,3 +117,30 @@ cd terraform
 ./terraform.exe apply -auto-approve
 
 ## TERRAFORM OUTPUT VARIABLES
+CLUSTER_NAME=($(./terraform/terraform.exe output name))
+CLUSTER_CA_CRT=($(./terraform/terraform.exe output cluster_ca_certificate))
+CLUSTER_ENDPOINT=($(./terraform/terraform.exe output endpoint))
+CLUSTER_MASTER_VERSION=($(./terraform/terraform.exe output master_version))
+
+######################################
+## [6]. LOG AND CONFIGURE INTO GCP  ##
+######################################
+
+gcloud auth activate-service-account $GPC_CLIENT_MAIL --key-file=terraform/account.json --project=$GCP_PROJECT
+
+gcloud container clusters get-credentials $GKE_NAME --region $GPC_LOCATION
+
+#####################################
+## [7]. CONFIGURAR HELM Y EL INGRESS ##
+#####################################
+
+
+## INSTLACION DE HELM
+kubectl create serviceaccount --namespace kube-system tiller
+kubectl create clusterrolebinding tiller-cluster-rule --clusterrole=cluster-admin --serviceaccount=kube-system:tiller
+helm init --service-account tiller
+kubectl get deployments -n kube-system
+
+## INSTALACION DE INGRESS
+helm install --name nginx-ingress stable/nginx-ingress --set rbac.create=true --set controller.publishService.enabled=true
+
