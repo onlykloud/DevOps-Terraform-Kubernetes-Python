@@ -11,7 +11,7 @@ Antes de ejecutar el script es necesario contar con los siguientes aplicativos
 6. docker (https://docs.docker.com/get-docker/)
 
 > ### Configuracion de variables de GCP
-En el archivo 'main.sh' reemplazar los valores iniciales ser service account>
+En el archivo 'main.sh' reemplazar los valores iniciales del service account
 
 GCP Project Name - Ejemplo: devops-manuel
 GCP_PROJECT="PUT_GCP_PROJECT_HERE"

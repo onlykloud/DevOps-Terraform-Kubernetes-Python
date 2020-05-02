@@ -126,7 +126,7 @@ CLUSTER_MASTER_VERSION=($(./terraform/terraform.exe output master_version))
 ## [6]. LOG IN AND CONFIGURE INTO GCP  ##
 #########################################
 
-gcloud auth activate-service-account $GPC_CLIENT_MAIL --key-file=terraform/account.json --project=$GCP_PROJECT
+gcloud auth activate-service-account $GPC_CLIENT_MAIL --key-file=account.json --project=$GCP_PROJECT
 
 gcloud container clusters get-credentials $GKE_NAME --region $GPC_LOCATION
 
@@ -148,10 +148,15 @@ helm install --name nginx-ingress stable/nginx-ingress --set rbac.create=true --
 #######################################
 
 # Build Docker image
-cd python
+cd ../python/src
 docker build -t python-rest .
 
 # Subir la imagen a GCR
 docker tag python-rest gcr.io/$GCP_PROJECT/mypythonapp
 
 docker push gcr.io/$GCP_PROJECT/mypythonapp
+
+#############################################
+## [9]. DEPLOYMENT DE LA APLICACION AL GKE ##
+#############################################
+
