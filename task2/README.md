@@ -1,4 +1,4 @@
-# Challenge DevOps Task 1
+# Challenge DevOps Task 2
 
 > ### Pre-requisitos:
 Antes de ejecutar el script es necesario contar con los siguientes aplicativos
@@ -38,17 +38,12 @@ GPC_CLIENT_CERT_URL="PUT_CLIENT_CERT_URL_HERE"
 
 > ### Configuracion de variables de Terraform
 
-1. GPC LOCATION
-GPC_LOCATION="PUT_GKE_LOCATION_HERE"
-
+1. GCE NAME
+GCI_NAME="PUT_GCE_NAME_HERE"
 2. GKE NAME
-GKE_NAME="PUT_GKE_NAME_HERE"
-
-3. GKE NODE POOL NAME
-GKE_NODE_POOL="PUT_GKE_NODEPOOL_NAME_HERE"
-
-4. GKE MACHINE TYPE
-GKE_MACHINE_TYPE="PUT_GKE_MACHINE_TYPE_HERE"
+GCI_LOCATION="PUT_LOCATION_HERE"
+3. GKE MACHINE TYPE
+GKE_MACHINE_TYPE="PUT_MACHINE_TYPE_HERE"
 
 > ### Ejecucion del script
 
@@ -56,8 +51,3 @@ Finalmente ejecutar el comando
 # sh ./main.sh
 
 > ### Resultado
-
-El resultado de la aplicación desplegada esta publicada en la siguiente URL:
-
-1. /greetings: http://34.68.146.239/greetings
-2. /square: http://34.68.146.239/square?number=43

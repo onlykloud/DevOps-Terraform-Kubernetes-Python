@@ -9,7 +9,7 @@ provider "google" {
 resource "google_container_cluster" "devops_cluster" {
   name     = var.gke_name
   location = var.location
-  initial_node_count = 1
+  initial_node_count = 2
 
   master_auth {
     username = ""

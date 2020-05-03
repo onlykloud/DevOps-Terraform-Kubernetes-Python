@@ -6,7 +6,7 @@ gpcVariableDefinition () {
     #############################################################
     "
 
-    ## GCP Project Name - Ejemplo: devops-manuel
+     ## GCP Project Name - Ejemplo: devops-manuel
     GCP_PROJECT="PUT_GCP_PROJECT_HERE"
     ## GCP Private Key ID - Ejemplo: 282b19cf817f43240aw984feaca8623aa29af233
     GPC_PRIVATE_KEY_ID="PUT_GCP_PRIVATE_KEY_ID_HERE"
@@ -27,14 +27,12 @@ terraformVariableDefinition () {
     #################################################
     "
 
-    ## GPC LOCATION
-    GPC_LOCATION="PUT_GKE_LOCATION_HERE"
+    ## GCI NAME
+    GCI_NAME="PUT_GCE_NAME_HERE"
     ## GKE NAME
-    GKE_NAME="PUT_GKE_NAME_HERE"
-    ## GKE NODE POOL NAME
-    GKE_NODE_POOL="PUT_GKE_NODEPOOL_NAME_HERE"
+    GCI_LOCATION="PUT_LOCATION_HERE"
     ## GKE MACHINE TYPE
-    GKE_MACHINE_TYPE="PUT_GKE_MACHINE_TYPE_HERE"
+    GKE_MACHINE_TYPE="PUT_MACHINE_TYPE_HERE"
 
 }
 
@@ -112,15 +110,13 @@ replaceTerraformVariables () {
     ###################################################
     "
 
-    jq -n '{  "project_id": $gcp_project, 
-            "location": $gcp_location,
-            "gke_name": $gke_name,
-            "gke_nodepool": $gke_nodepool,
-            "gke_machine_type": $gke_machine_type } ' \
+    jq -n '{    "project_id": $gcp_project, 
+                "gci_name": $gci_name, 
+                "location": $gcp_location,
+                "gke_machine_type": $gke_machine_type } ' \
         --arg gcp_project $GCP_PROJECT  \
-        --arg gcp_location $GPC_LOCATION  \
-        --arg gke_name $GKE_NAME  \
-        --arg gke_nodepool $GKE_NODE_POOL \
+        --arg gci_name $GCI_NAME  \
+        --arg gcp_location $GCI_LOCATION  \
         --arg gke_machine_type $GKE_MACHINE_TYPE \
         > terraform/terraform.tfvars.json
 
@@ -151,105 +147,9 @@ executeTerraformVariables () {
 
 }
 
-logInGpc () {
-  echo "
-  #########################################
-  ## [6]. LOG IN AND CONFIGURE INTO GCP  ##
-  #########################################
-  "
-
-  gcloud auth activate-service-account $GPC_CLIENT_MAIL --key-file=account.json --project=$GCP_PROJECT
-
-  gcloud container clusters get-credentials $GKE_NAME --region $GPC_LOCATION
-
-}
-
-configureHelm() {
-  echo "
-  #######################################
-  ## [7]. CONFIGURAR HELM Y EL INGRESS ##
-  #######################################
-  "
-
-  ## INSTLACION DE HELM
-  kubectl create serviceaccount --namespace kube-system tiller
-  kubectl create clusterrolebinding tiller-cluster-rule --clusterrole=cluster-admin --serviceaccount=kube-system:tiller
-  helm init --service-account tiller
-  kubectl get deployments -n kube-system
-
-  ## INSTALACION DE INGRESS
-  helm install --name nginx-ingress stable/nginx-ingress --set rbac.create=true --set controller.publishService.enabled=true
-
-}
-
-createDockerImage () {
-  echo "
-  #######################################
-  ## [8]. CREACION DE IMAGEN DE DOCKER ##
-  #######################################
-  "
-
-  # Build Docker image
-  cd ../python/src
-  docker build -t pythonrest:latest .
-
-  # Autenticar con GCR
-  gcloud auth configure-docker
-
-  # Subir la imagen a GCR
-  docker tag pythonrest gcr.io/$GCP_PROJECT/mypythonapp
-
-  docker push gcr.io/$GCP_PROJECT/mypythonapp
-
-}
-
-configureAuthGkeGcr () {
-  echo "
-  #############################################
-  ## [9]. CONFIGURACION DE AUTH DE GKE Y GCR ##
-  #############################################
-  "
-
-  cd ../../terraform
-  kubectl create secret docker-registry regcred \
-    --docker-server=https://gcr.io \
-    --docker-username=_json_key \
-    --docker-email=$GPC_CLIENT_MAIL \
-    --docker-password="$(cat account.json)"
-
-  kubectl patch serviceaccount default \
-    -p "{\"imagePullSecrets\": [{\"name\": \"regcred\"}]}"
-
-}
-
-deploymetToGke () {
-  echo "
-  ##############################################
-  ## [10]. DEPLOYMENT DE LA APLICACION AL GKE ##
-  ##############################################
-  "
-
-  # CREAR DEPLOYMENT
-  kubectl create deployment mypythonapp --image=gcr.io/$GCP_PROJECT/mypythonapp:latest
-
-  # Exponer el service publicamente
-  kubectl expose deployment mypythonapp --type=LoadBalancer --port 80 --target-port 5000
-
-  echo "
-  #################################
-  ## [10]. DEPLOYMENT COMPLETADO ##
-  #################################
-  "
-}
-
 gpcVariableDefinition
 terraformVariableDefinition
 replaceGpcVariables
 terraformInstallationByOs
 replaceTerraformVariables
 executeTerraformVariables
-logInGpc
-configureHelm
-createDockerImage
-configureAuthGkeGcr
-deploymetToGke
