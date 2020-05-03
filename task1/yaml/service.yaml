@@ -1,0 +1,18 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: mypythonapp
+  namespace: default
+  labels:
+    app: mypythonapp
+spec:
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 5000
+      nodePort: 30723
+  selector:
+    app: mypythonapp
+  type: LoadBalancer
+  sessionAffinity: None
+  externalTrafficPolicy: Cluster
