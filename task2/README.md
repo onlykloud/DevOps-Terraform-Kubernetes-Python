@@ -1,4 +1,4 @@
-# Challenge DevOps Task 1
+# Challenge DevOps Task 2
 
 > ### Pre-requisitos:
 Antes de ejecutar el script es necesario contar con los siguientes aplicativos
@@ -49,10 +49,3 @@ GKE_MACHINE_TYPE="PUT_GKE_MACHINE_TYPE_HERE"
 
 Finalmente ejecutar el comando
 # sh ./main.sh
-
-> ### Resultado
-
-El resultado de la aplicación desplegada esta publicada en la siguiente URL:
-
-1. /greetings: http://34.71.229.255/greetings
-2. /square: http://34.71.229.255/square?number=43
