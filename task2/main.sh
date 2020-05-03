@@ -27,12 +27,10 @@ terraformVariableDefinition () {
     #################################################
     "
 
-    ## GPC LOCATION
-    GPC_LOCATION="PUT_GKE_LOCATION_HERE"
+    ## GCI NAME
+    GCI_NAME="PUT_GCI_NAME_HERE"
     ## GKE NAME
-    GKE_NAME="PUT_GKE_NAME_HERE"
-    ## GKE NODE POOL NAME
-    GKE_NODE_POOL="PUT_GKE_NODEPOOL_NAME_HERE"
+    GCI_LOCATION="PUT_GCI_LOCATION_HERE"
     ## GKE MACHINE TYPE
     GKE_MACHINE_TYPE="PUT_GKE_MACHINE_TYPE_HERE"
 
@@ -112,15 +110,11 @@ replaceTerraformVariables () {
     ###################################################
     "
 
-    jq -n '{  "project_id": $gcp_project, 
+    jq -n '{  "gci_name": $gci_name, 
             "location": $gcp_location,
-            "gke_name": $gke_name,
-            "gke_nodepool": $gke_nodepool,
             "gke_machine_type": $gke_machine_type } ' \
-        --arg gcp_project $GCP_PROJECT  \
+        --arg gci_name $GCI_NAME  \
         --arg gcp_location $GPC_LOCATION  \
-        --arg gke_name $GKE_NAME  \
-        --arg gke_nodepool $GKE_NODE_POOL \
         --arg gke_machine_type $GKE_MACHINE_TYPE \
         > terraform/terraform.tfvars.json
 
