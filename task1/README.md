@@ -28,7 +28,7 @@ GPC_CLIENT_MAIL="PUT_GCP_CLIENT_MAIL_HERE"
 GCP Client ID - Ejemplo: 106512508332840639292
 GPC_CLIENT_ID="PUT_GCP_CLIENT_ID_HERE"
 
-GCP CLIENT X509 CERT URL - Ejemplo: https://www.googleapis.com/robot/v1/metadata/x509/gcp-devops%40devop-manu.iam.gserviceaccount.com
+GCP CLIENT X509 CERT URL - Ejemplo: https://www.googleapis.com/gcp-devops%40devop-manu.iam.gserviceaccount.com
 GPC_CLIENT_CERT_URL="PUT_CLIENT_CERT_URL_HERE"
 
 > ### Configuracion de variables de Terraform
