@@ -10,42 +10,44 @@ Antes de ejecutar el script es necesario contar con los siguientes aplicativos
 5. python (https://www.python.org/downloads/)
 6. docker (https://docs.docker.com/get-docker/)
 
+> ### Herramientas de Desarrollo:
+OS: Windows 10 Pro
+Bash Tool: Git Bash
+Editor: Visual Studio Code
+
 > ### Configuracion de variables de GCP
 En el archivo 'main.sh' reemplazar los valores iniciales del service account
 
-GCP Project Name - Ejemplo: devops-manuel
+1. GCP Project Name - Ejemplo: devops-manuel
 GCP_PROJECT="PUT_GCP_PROJECT_HERE"
 
- GCP Private Key ID - Ejemplo: 282b19cf817f43240aw984feaca8623aa29af233
+2. GCP Private Key ID - Ejemplo: 282b19cf817f43240aw984feaca8623aa29af233
 GPC_PRIVATE_KEY_ID="PUT_GCP_PRIVATE_KEY_ID_HERE"
 
-GCP Private Key - Ejemplo: -----BEGIN PRIVATE KEY-----\-----END PRIVATE KEY-----\n
+3. GCP Private Key - Ejemplo: -----BEGIN PRIVATE KEY-----\-----END PRIVATE KEY-----\n
 GPC_PRIVATE_KEY="PUT_PRIVATE_KEY_HERE"
 
-GCP Client Email - Ejemplo: gcp-devops@devop-manu.iam.gserviceaccount.com
+4. GCP Client Email - Ejemplo: gcp-devops@devop-manu.iam.gserviceaccount.com
 GPC_CLIENT_MAIL="PUT_GCP_CLIENT_MAIL_HERE"
 
-GCP Client ID - Ejemplo: 106512508332840639292
+5. GCP Client ID - Ejemplo: 106512508332840639292
 GPC_CLIENT_ID="PUT_GCP_CLIENT_ID_HERE"
 
-GCP CLIENT X509 CERT URL - Ejemplo: https://www.googleapis.com/robot/v1/metadata/x509/gcp-devops%40devop-manu.iam.gserviceaccount.com
+6. GCP CLIENT X509 CERT URL - Ejemplo: https://www.googleapis.com/gcp-devops%40devop-manu.iam.gserviceaccount.com
 GPC_CLIENT_CERT_URL="PUT_CLIENT_CERT_URL_HERE"
 
 > ### Configuracion de variables de Terraform
 
-GPC LOCATION
-GPC_LOCATION="PUT_GKE_LOCATION_HERE"
-
-GKE NAME
-GKE_NAME="PUT_GKE_NAME_HERE"
-
-GKE NODE POOL NAME
-GKE_NODE_POOL="PUT_GKE_NODEPOOL_NAME_HERE"
-
-GKE MACHINE TYPE
-GKE_MACHINE_TYPE="PUT_GKE_MACHINE_TYPE_HERE"
+1. GCE NAME
+GCI_NAME="PUT_GCE_NAME_HERE"
+2. GKE NAME
+GCI_LOCATION="PUT_LOCATION_HERE"
+3. GKE MACHINE TYPE
+GKE_MACHINE_TYPE="PUT_MACHINE_TYPE_HERE"
 
 > ### Ejecucion del script
 
 Finalmente ejecutar el comando
 # sh ./main.sh
+
+> ### Resultado
