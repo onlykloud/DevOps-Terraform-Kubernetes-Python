@@ -11,9 +11,9 @@ Antes de ejecutar el script es necesario contar con los siguientes aplicativos
 6. docker (https://docs.docker.com/get-docker/)
 
 > ### Herramientas de Desarrollo:
-OS: Windows 10 Pro
-Bash Tool: Git Bash
-Editor: Visual Studio Code
+- OS: Windows 10 Pro
+- Bash Tool: Git Bash
+- Editor: Visual Studio Code
 
 > ### Configuracion de variables de GCP
 En el archivo 'main.sh' reemplazar los valores iniciales del service account
