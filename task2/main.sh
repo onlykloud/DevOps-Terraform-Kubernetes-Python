@@ -140,10 +140,7 @@ executeTerraformVariables () {
     ./terraform.exe apply -auto-approve
 
     ## TERRAFORM OUTPUT VARIABLES
-    CLUSTER_NAME=($(./terraform.exe output name))
-    CLUSTER_CA_CRT=($(./terraform.exe output cluster_ca_certificate))
-    CLUSTER_ENDPOINT=($(./terraform.exe output endpoint))
-    CLUSTER_MASTER_VERSION=($(./terraform.exe output master_version))
+    VM_IP=($(./terraform.exe output ip))
 
 }
 
